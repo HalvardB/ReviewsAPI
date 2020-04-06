@@ -1,19 +1,21 @@
 package com.udacity.course3.reviews.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "comment")
     private String commment;
 
+    @Column(name = "reviewId")
+    private Long reviewId;
 
     public Comment(){}
 
@@ -31,5 +33,13 @@ public class Comment {
 
     public void setCommment(String commment) {
         this.commment = commment;
+    }
+
+    public Long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
     }
 }

@@ -1,18 +1,20 @@
 package com.udacity.course3.reviews.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Review {
+public class Review implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Product product;
+    @Column(name = "product_id")
+    private Long productId;
 
     @OneToOne
+    @JoinColumn(name = "id")
     private Comment comment;
 
     public Review() {
@@ -26,19 +28,19 @@ public class Review {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public Comment getComment() {
         return comment;
     }
 
     public void setComment(Comment comment) {
         this.comment = comment;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }
