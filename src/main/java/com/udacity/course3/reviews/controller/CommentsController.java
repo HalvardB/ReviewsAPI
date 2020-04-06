@@ -1,5 +1,8 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.repository.CommentRepository;
+import com.udacity.course3.reviews.repository.ProductRepository;
+import com.udacity.course3.reviews.repository.ReviewRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,15 @@ import java.util.List;
 public class CommentsController {
 
     // TODO: Wire needed JPA repositories here
+    private CommentRepository commentRepository;
+    private ProductRepository productRepository;
+    private ReviewRepository reviewRepository;
+
+    public CommentsController(CommentRepository commentRepository, ProductRepository productRepository, ReviewRepository reviewRepository){
+        this.commentRepository = commentRepository;
+        this.productRepository = productRepository;
+        this.reviewRepository = reviewRepository;
+    }
 
     /**
      * Creates a comment for a review.
