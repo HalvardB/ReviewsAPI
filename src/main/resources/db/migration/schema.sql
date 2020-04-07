@@ -1,17 +1,17 @@
-CREATE TABLE products (
-    id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(300)
+CREATE TABLE PRODUCTS (
+                          p_id bigint AUTO_INCREMENT PRIMARY KEY,
+                          name VARCHAR(300)
 );
 
-CREATE TABLE reviews (
-    id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id bigint,
-    foreign key (product_id) references products (id)
+CREATE TABLE REVIEWS (
+                         r_id bigint AUTO_INCREMENT PRIMARY KEY,
+                         product_id bigint,
+                         foreign key (product_id) references PRODUCTS (p_id)
 );
 
-CREATE TABLE comments (
-    id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    info VARCHAR(300),
-    review_id bigint,
-    foreign key (review_id) references comments (id)
+CREATE TABLE COMMENTS (
+                          c_id bigint AUTO_INCREMENT PRIMARY KEY,
+                          info VARCHAR(300),
+                          review_id bigint,
+                          foreign key (review_id) references REVIEWS (r_id)
 );

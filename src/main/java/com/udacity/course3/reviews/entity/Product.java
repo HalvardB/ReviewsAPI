@@ -5,25 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
     @Id
+    @Column(name = "p_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long pId;
+
+    @Column(name = "name")
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Review> reviews = new ArrayList<>();
+    // @OneToMany
+    // @JoinColumn(name = "r_id")
+    // private List<Review> reviews = new ArrayList<>();
 
     public Product(){}
 
     public Long getId() {
-        return id;
+        return pId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.pId = id;
     }
 
     public String getName() {
@@ -34,6 +38,7 @@ public class Product {
         this.name = name;
     }
 
+    /*
     public List<Review> getReviews() {
         return reviews;
     }
@@ -41,4 +46,6 @@ public class Product {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
+     */
 }

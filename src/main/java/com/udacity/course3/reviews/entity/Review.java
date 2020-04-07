@@ -4,28 +4,30 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "reviews")
 public class Review implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "r_id")
+    private Long rId;
 
     @Column(name = "product_id")
     private Long productId;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "c_id")
     private Comment comment;
 
     public Review() {
     }
 
     public Long getId() {
-        return id;
+        return rId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.rId = id;
     }
 
     public Comment getComment() {
