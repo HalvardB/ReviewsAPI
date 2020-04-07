@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +43,12 @@ public class CommentController {
         Optional<Review> review = reviewRepository.findById(reviewId);
 
         if(review.isPresent()){
-            comment.setReviewId(reviewId);
-            Comment updatedComment = commentRepository.save(comment);
+            Comment newComment = new Comment();
+            newComment.setReviewId(reviewId);
+            newComment.setInfo(comment.getInfo());
+            newComment.setReviewId(comment.getReviewId());
+
+            Comment updatedComment = commentRepository.save(newComment);
             return new ResponseEntity<>(updatedComment, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

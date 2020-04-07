@@ -16,18 +16,16 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    // @OneToMany
-    // @JoinColumn(name = "r_id")
-    // private List<Review> reviews = new ArrayList<>();
+//     @OneToMany
+//     @JoinColumn(name = "r_id")
+//     private List<Review> reviews = new ArrayList<>();
 
-    public Product(){}
-
-    public Long getId() {
+    public Long getpId() {
         return pId;
     }
 
-    public void setId(Long id) {
-        this.pId = id;
+    public void setpId(Long pId) {
+        this.pId = pId;
     }
 
     public String getName() {
@@ -37,15 +35,4 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-    /*
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-     */
 }

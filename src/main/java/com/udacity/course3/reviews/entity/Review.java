@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "reviews")
+@Table(name = "REVIEWS")
 public class Review implements Serializable {
 
     @Id
@@ -15,27 +15,17 @@ public class Review implements Serializable {
     @Column(name = "product_id")
     private Long productId;
 
-    @OneToOne
-    @JoinColumn(name = "c_id")
-    private Comment comment;
+//    @OneToOne
+//    @JoinColumn(name = "c_id")
+//    private Comment comment;
 
-    public Review() {
-    }
 
-    public Long getId() {
+    public Long getrId() {
         return rId;
     }
 
-    public void setId(Long id) {
-        this.rId = id;
-    }
-
-    public Comment getComment() {
-        return comment;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public void setrId(Long rId) {
+        this.rId = rId;
     }
 
     public Long getProductId() {

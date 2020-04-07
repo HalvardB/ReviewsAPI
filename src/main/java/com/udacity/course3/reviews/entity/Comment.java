@@ -12,27 +12,25 @@ public class Comment {
     private Long cId;
 
     @Column(name = "info")
-    private String commment;
+    private String info;
 
     @Column(name = "reviewId")
     private Long reviewId;
 
-    public Comment(){}
-
-    public Long getId() {
+    public Long getcId() {
         return cId;
     }
 
-    public void setId(Long id) {
-        this.cId = id;
+    public void setcId(Long cId) {
+        this.cId = cId;
     }
 
-    public String getCommment() {
-        return commment;
+    public String getInfo() {
+        return info;
     }
 
-    public void setCommment(String commment) {
-        this.commment = commment;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Long getReviewId() {
