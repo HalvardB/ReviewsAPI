@@ -1,11 +1,15 @@
 package com.udacity.course3.reviews.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "REVIEWS")
-public class Review implements Serializable {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +19,14 @@ public class Review implements Serializable {
     @Column(name = "product_id")
     private Long productId;
 
-//    @OneToOne
-//    @JoinColumn(name = "c_id")
-//    private Comment comment;
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "product_id")
+//    @JsonManagedReference
+//    private Product product;
 
+    @OneToMany(mappedBy = "reviewId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Comment> comments = new ArrayList<>();
 
     public Long getrId() {
         return rId;
@@ -34,5 +42,21 @@ public class Review implements Serializable {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -70,7 +70,8 @@ public class CommentController {
         Optional<Review> review = reviewRepository.findById(reviewId);
 
         if(review.isPresent()){
-            List<Comment> allComments = commentRepository.findAllByReviewId(reviewId);
+            List<Comment> allComments = review.get().getComments();
+            // List<Comment> allComments = commentRepository.findAllByReviewId(reviewId);
             return new ResponseEntity<>(allComments, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,7 @@
 package com.udacity.course3.reviews.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,8 +16,13 @@ public class Comment {
     @Column(name = "info")
     private String info;
 
-    @Column(name = "reviewId")
+    @Column(name = "review_id")
     private Long reviewId;
+
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "review_id")
+//    @JsonManagedReference
+//    private Review review;
 
     public Long getcId() {
         return cId;
@@ -32,6 +39,14 @@ public class Comment {
     public void setInfo(String info) {
         this.info = info;
     }
+
+//    public Review getReview() {
+//        return review;
+//    }
+//
+//    public void setReview(Review review) {
+//        this.review = review;
+//    }
 
     public Long getReviewId() {
         return reviewId;

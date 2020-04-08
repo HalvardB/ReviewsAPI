@@ -51,7 +51,7 @@ public class ReviewsApplicationTests {
 	}
 
 	@Test
-	public void testRepositories(){
+	public void testSavingEntities(){
 
 		// Test Product
 		Product product = new Product();
@@ -72,4 +72,6 @@ public class ReviewsApplicationTests {
 		commentRepository.save(comment);
 		assertEquals(1, commentRepository.findAll().size());
 	}
+
+
 }

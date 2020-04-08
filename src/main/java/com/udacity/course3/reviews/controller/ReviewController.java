@@ -41,7 +41,6 @@ public class ReviewController {
         Optional<Product> product = productRepository.findById(productId);
 
         if(product.isPresent()){
-            review.setProductId(productId);
             review = reviewRepository.save(review);
             return new ResponseEntity<>(review, HttpStatus.OK);
         } else {
@@ -57,7 +56,8 @@ public class ReviewController {
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
     public ResponseEntity<List<?>> listReviewsForProduct(@PathVariable("productId") Long productId) {
-        List<Review> allReviews = reviewRepository.findByProductId(productId);
+        List<Review> allReviews = productRepository.findById(productId).get().getReviews();
+        // List<Review> allReviews = reviewRepository.findByProductId(productId);
         return new ResponseEntity<>(allReviews, HttpStatus.OK);
     }
 }

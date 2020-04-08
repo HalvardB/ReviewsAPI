@@ -1,5 +1,7 @@
 package com.udacity.course3.reviews.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,12 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-//     @OneToMany
-//     @JoinColumn(name = "r_id")
-//     private List<Review> reviews = new ArrayList<>();
+//    @OneToMany(mappedBy = "product")
+//    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "productId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Review> reviews = new ArrayList<>();
 
     public Long getpId() {
         return pId;
@@ -34,5 +39,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
