@@ -73,5 +73,24 @@ public class ReviewsApplicationTests {
 		assertEquals(1, commentRepository.findAll().size());
 	}
 
-
+//	@Test
+//	public void testGetReviewsFromProduct(){
+//		Product product = new Product();
+//		product.setName("Product 1");
+//		Product updatedProduct = productRepository.save(product);
+//
+//		Review review1 = new Review();
+//		review1.setProductId(updatedProduct.getpId());
+//		reviewRepository.save(review1);
+//
+//		Review review2 = new Review();
+//		review2.setProductId(updatedProduct.getpId());
+//		reviewRepository.save(review2);
+//
+//		updatedProduct = productRepository.findById(product.getpId()).get();
+//		assertEquals(2, updatedProduct.getReviews().size());
+//
+//		assertEquals(2, reviewRepository.findAll().size());
+//		assertEquals(review1.getProductId(), updatedProduct.getpId());
+//	}
 }

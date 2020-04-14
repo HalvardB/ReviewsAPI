@@ -20,7 +20,7 @@ public class Review {
     private Long productId;
 
 //    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id")
+//    @JoinColumn(name = "p_id")
 //    @JsonManagedReference
 //    private Product product;
 

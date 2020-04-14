@@ -18,9 +18,6 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-//    @OneToMany(mappedBy = "product")
-//    private List<Review> reviews = new ArrayList<>();
-
     @OneToMany(mappedBy = "productId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Review> reviews = new ArrayList<>();
