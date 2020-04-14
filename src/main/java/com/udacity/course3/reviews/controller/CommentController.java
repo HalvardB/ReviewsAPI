@@ -1,9 +1,8 @@
 package com.udacity.course3.reviews.controller;
 
-import com.udacity.course3.reviews.entity.Comment;
-import com.udacity.course3.reviews.entity.Review;
-import com.udacity.course3.reviews.repository.CommentRepository;
-import com.udacity.course3.reviews.repository.ReviewRepository;
+import com.udacity.course3.reviews.entity.CommentMongo;
+import com.udacity.course3.reviews.entity.ReviewMongo;
+import com.udacity.course3.reviews.repository.ReviewMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +21,7 @@ public class CommentController {
     // TODO: Wire needed JPA repositories here
 
     @Autowired
-    private CommentRepository commentRepository;
-
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewMongoRepository reviewRepository;
 
     /**
      * Creates a comment for a review.
@@ -38,18 +34,16 @@ public class CommentController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
-    public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") Long reviewId, @RequestBody Comment comment) {
+    public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") String reviewId, @RequestBody CommentMongo comment) {
 
-        Optional<Review> review = reviewRepository.findById(reviewId);
+        Optional<ReviewMongo> review = reviewRepository.findById(reviewId);
 
         if(review.isPresent()){
-            Comment newComment = new Comment();
-            newComment.setReviewId(reviewId);
+            CommentMongo newComment = new CommentMongo();
             newComment.setInfo(comment.getInfo());
-            newComment.setReviewId(comment.getReviewId());
-
-            Comment updatedComment = commentRepository.save(newComment);
-            return new ResponseEntity<>(updatedComment, HttpStatus.OK);
+            review.get().addComment(newComment);
+            ReviewMongo updatedReview = reviewRepository.save(review.get());
+            return new ResponseEntity<>(updatedReview, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -65,13 +59,12 @@ public class CommentController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
-    public ResponseEntity<List<?>> listCommentsForReview(@PathVariable("reviewId") Long reviewId) {
+    public ResponseEntity<List<?>> listCommentsForReview(@PathVariable("reviewId") String reviewId) {
 
-        Optional<Review> review = reviewRepository.findById(reviewId);
+        Optional<ReviewMongo> review = reviewRepository.findById(reviewId);
 
         if(review.isPresent()){
-            List<Comment> allComments = review.get().getComments();
-            // List<Comment> allComments = commentRepository.findAllByReviewId(reviewId);
+            List<CommentMongo> allComments = review.get().getComments();
             return new ResponseEntity<>(allComments, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

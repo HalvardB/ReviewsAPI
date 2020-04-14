@@ -19,15 +19,11 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ReviewsApplicationTests {
+public class JPATests {
 
 	@Autowired private ProductRepository productRepository;
 	@Autowired private ReviewRepository reviewRepository;
 	@Autowired private CommentRepository commentRepository;
-
-	@Test
-	public void contextLoads() {
-	}
 
 	@Test
 	public void injectedComponentsAreNotNull(){
@@ -43,7 +39,7 @@ public class ReviewsApplicationTests {
 		Product product = new Product();
 		product.setName("MacBook Pro");
 		Product updatedProduct = productRepository.save(product);
-		assertEquals("MacBook Pro", productRepository.findById(updatedProduct.getpId()).get().getName());
+		assertEquals("MacBook Pro", productRepository.findById(product.getpId()).get().getName());
 		assertEquals(1, productRepository.findAll().size());
 
 		// Test Review

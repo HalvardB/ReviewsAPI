@@ -1,9 +1,9 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Product;
-import com.udacity.course3.reviews.entity.Review;
+import com.udacity.course3.reviews.entity.ReviewMongo;
 import com.udacity.course3.reviews.repository.ProductRepository;
-import com.udacity.course3.reviews.repository.ReviewRepository;
+import com.udacity.course3.reviews.repository.ReviewMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class ReviewController {
     private ProductRepository productRepository;
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewMongoRepository reviewRepository;
 
     /**
      * Creates a review for a product.
@@ -37,8 +37,9 @@ public class ReviewController {
      * @return The created review or 404 if product id is not found.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
-    public ResponseEntity<?> createReviewForProduct(@PathVariable("productId") Long productId, @RequestBody Review review) {
+    public ResponseEntity<?> createReviewForProduct(@PathVariable("productId") Long productId, @RequestBody ReviewMongo review) {
         Optional<Product> product = productRepository.findById(productId);
+        review.setProductId(productId);
 
         if(product.isPresent()){
             review = reviewRepository.save(review);
@@ -56,8 +57,13 @@ public class ReviewController {
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
     public ResponseEntity<List<?>> listReviewsForProduct(@PathVariable("productId") Long productId) {
-        List<Review> allReviews = productRepository.findById(productId).get().getReviews();
-        // List<Review> allReviews = reviewRepository.findByProductId(productId);
-        return new ResponseEntity<>(allReviews, HttpStatus.OK);
+        Optional<Product> product = productRepository.findById(productId);
+
+        if(product.isPresent()){
+            List<ReviewMongo> allReviews = reviewRepository.findAllByProductId(productId);
+            return new ResponseEntity<>(allReviews, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
