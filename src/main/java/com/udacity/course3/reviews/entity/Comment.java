@@ -40,14 +40,6 @@ public class Comment {
         this.info = info;
     }
 
-//    public Review getReview() {
-//        return review;
-//    }
-//
-//    public void setReview(Review review) {
-//        this.review = review;
-//    }
-
     public Long getReviewId() {
         return reviewId;
     }

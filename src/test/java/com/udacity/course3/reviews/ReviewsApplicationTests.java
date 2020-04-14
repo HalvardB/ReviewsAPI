@@ -12,12 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
-
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -27,10 +21,6 @@ import static org.junit.Assert.assertEquals;
 @DataJpaTest
 public class ReviewsApplicationTests {
 
-	@Autowired private DataSource dataSource;
-	@Autowired private JdbcTemplate jdbcTemplate;
-	@Autowired private EntityManager entityManager;
-	@Autowired private TestEntityManager testEntityManager;
 	@Autowired private ProductRepository productRepository;
 	@Autowired private ReviewRepository reviewRepository;
 	@Autowired private CommentRepository commentRepository;
@@ -41,10 +31,6 @@ public class ReviewsApplicationTests {
 
 	@Test
 	public void injectedComponentsAreNotNull(){
-		assertThat(dataSource, is(notNullValue()));
-		assertThat(jdbcTemplate, is(notNullValue()));
-		assertThat(entityManager, is(notNullValue()));
-		assertThat(testEntityManager, is(notNullValue()));
 		assertThat(productRepository, is(notNullValue()));
 		assertThat(reviewRepository, is(notNullValue()));
 		assertThat(commentRepository, is(notNullValue()));
@@ -72,25 +58,4 @@ public class ReviewsApplicationTests {
 		commentRepository.save(comment);
 		assertEquals(1, commentRepository.findAll().size());
 	}
-
-//	@Test
-//	public void testGetReviewsFromProduct(){
-//		Product product = new Product();
-//		product.setName("Product 1");
-//		Product updatedProduct = productRepository.save(product);
-//
-//		Review review1 = new Review();
-//		review1.setProductId(updatedProduct.getpId());
-//		reviewRepository.save(review1);
-//
-//		Review review2 = new Review();
-//		review2.setProductId(updatedProduct.getpId());
-//		reviewRepository.save(review2);
-//
-//		updatedProduct = productRepository.findById(product.getpId()).get();
-//		assertEquals(2, updatedProduct.getReviews().size());
-//
-//		assertEquals(2, reviewRepository.findAll().size());
-//		assertEquals(review1.getProductId(), updatedProduct.getpId());
-//	}
 }

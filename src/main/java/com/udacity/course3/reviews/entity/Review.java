@@ -44,14 +44,6 @@ public class Review {
         this.productId = productId;
     }
 
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-
     public List<Comment> getComments() {
         return comments;
     }
