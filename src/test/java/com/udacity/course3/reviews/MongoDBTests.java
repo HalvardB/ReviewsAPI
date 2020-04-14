@@ -30,7 +30,7 @@ public class MongoDBTests {
     }
 
     @Test
-    public void testAddingReviewToMongoDB(){
+    public void testMongoDB(){
         int expectedReviewCount = reviewMongoRepository.findAll().size() + 1;
         String commentInfo = "Some important info";
 
@@ -46,5 +46,7 @@ public class MongoDBTests {
 
         assertEquals(expectedReviewCount, reviewMongoRepository.findAll().size());
         assertEquals(commentInfo, updatedReview.getComments().get(0).getInfo());
+
+        assertThat(reviewMongoRepository.findAllByProductId(1L), is(notNullValue()));
     }
 }
